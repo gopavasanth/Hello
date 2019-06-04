@@ -8,7 +8,7 @@ export async function createUser(args) {
             email,
             password,
             confirm
-        } = args.userInput; //retrieve values from arguments
+        } = args; //retrieve values from arguments
 
         const existingUser = await User.findOne({ email });
 
