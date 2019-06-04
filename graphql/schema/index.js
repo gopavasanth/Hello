@@ -7,10 +7,10 @@ type User {
     token: String!
 }
 type RootQuery {
-    login(email: String!, password: String!): User
     verifyToken(token: String!): User
 }
 type RootMutation {
+    tokenAuth(email: String!, password: String!): User
     createUser(email: String!, password: String!, confirm: String!): User
 }
 schema {
