@@ -39,7 +39,7 @@ export async function createUser(args) {
     }
 }
 
-export async function login(args) {
+export async function tokenAuth(args) {
     try {
         const user = await User.findOne({ email: args.email });
         if (!user) throw new Error('Email does not exist');
