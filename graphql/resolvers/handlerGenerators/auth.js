@@ -6,6 +6,9 @@ export async function createUser(args) {
     try {
         const {
             email,
+            username,
+            firstname,
+            lastname,
             password,
             confirm
         } = args; //retrieve values from arguments
@@ -23,6 +26,9 @@ export async function createUser(args) {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({
             email,
+            username,
+            firstname,
+            lastname,
             password: hashedPassword
         }, (err) => { if (err) throw err });
 
@@ -56,7 +62,7 @@ export async function tokenAuth(args) {
     }
 }
 
-export async function verifyToken(args) {
+export async function getProfile(args) {
     try {
         const decoded = jwt.verify(args.token, "mysecret");
         const user = await User.findOne({ _id: decoded.id })
