@@ -5,7 +5,7 @@ class Index extends React.Component {
     return (
       <React.Fragment>
         <div className="page-container">
-         <h1>Welcome</h1>
+          <h1>Welcome</h1>
         </div>
       </React.Fragment>
     );

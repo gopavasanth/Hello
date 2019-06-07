@@ -36,7 +36,7 @@ export async function createUser(args) {
 
         // if user is registered without errors
         // create a token
-        const token = jwt.sign({ id: user._id }, "mysecret");
+        const token = jwt.sign({ id: user._id }, "mysecret", {expiresIn: '24h'});
 
         return { token, password: null, ...user._doc }
     }
@@ -51,9 +51,9 @@ export async function tokenAuth(args) {
         if (!user) throw new Error('Email does not exist');
 
         const passwordIsValid = await bcrypt.compareSync(args.password, user.password);
-        if (!passwordIsValid) throw new Error('Password incorrect');
+        if (!passwordIsValid) throw new Error('Email or Password is invalid');
 
-        const token = jwt.sign({ id: user._id }, "mysecret");
+        const token = jwt.sign({ id: user._id }, "mysecret", {expiresIn: 900});
 
         return { token, password: null, ...user._doc }
     }
@@ -72,3 +72,21 @@ export async function getProfile(args) {
         throw err;
     }
 }
+
+export async function Users(){
+    try{
+        const users = await User.find({})
+            .populate()
+            .exec();
+            return users.map(user => ({
+                _id: user._id.toString(),
+                username: user.username,
+                email: user.email,
+                firstname: user.firstname,
+                lastname: user.lastname
+              }));
+    }
+    catch (err) {
+        throw err;
+    }
+};

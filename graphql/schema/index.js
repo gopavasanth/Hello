@@ -10,6 +10,7 @@ type User {
     token: String!
 }
 type RootQuery {
+    Users: [User!]!
     getProfile(token: String!): User
 }
 type RootMutation {
