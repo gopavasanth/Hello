@@ -1,12 +1,11 @@
 import React from 'react';
+import Home from '../pages/Home';
 
 class Index extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="page-container">
-          <h1>Welcome</h1>
-        </div>
+        <Home/>
       </React.Fragment>
     );
   }
