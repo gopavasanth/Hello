@@ -1,4 +1,5 @@
 import User from '../../../models/user';
+import Travel from '../../../models/travel';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -53,7 +54,7 @@ export async function tokenAuth(args) {
         const passwordIsValid = await bcrypt.compareSync(args.password, user.password);
         if (!passwordIsValid) throw new Error('Email or Password is invalid');
 
-        const token = jwt.sign({ id: user._id }, "mysecret", {expiresIn: 900});
+        const token = jwt.sign({ id: user._id }, "mysecret", {expiresIn: '24h'});
 
         return { token, password: null, ...user._doc }
     }
@@ -84,6 +85,44 @@ export async function Users(){
                 email: user.email,
                 firstname: user.firstname,
                 lastname: user.lastname
+              }));
+    }
+    catch (err) {
+        throw err;
+    }
+};
+export async function createTravel(args) {
+    try {
+        const {
+            location,
+            time,
+            date
+        } = args; 
+        
+        const travel = new Travel({
+           location,
+           time,
+           date,
+        }, (err) => { if (err) throw err });
+
+        travel.save();
+
+        return { ...travel._doc }
+    }
+    catch (err) {
+        throw err;
+    }
+};
+export async function Travels(){
+    try{
+        const travels = await Travel.find({})
+            .populate()
+            .exec();
+            return travels.map(travel => ({
+                _id: travel._id.toString(),
+                location: travel.location,
+                time: travel.time,
+                date: travel.date,
               }));
     }
     catch (err) {

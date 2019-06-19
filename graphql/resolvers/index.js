@@ -1,5 +1,5 @@
-import * as authHandlers from './handlerGenerators/auth';
+import * as Handlers from './handlerGenerators/handle';
 
 export default {
-    ...authHandlers
+    ...Handlers
 }
