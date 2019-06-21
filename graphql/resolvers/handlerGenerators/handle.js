@@ -94,20 +94,29 @@ export async function Users(){
 export async function createTravel(args) {
     try {
         const {
+            token,
             location,
             time,
-            date
+            date,
         } = args; 
-        
-        const travel = new Travel({
-           location,
-           time,
-           date,
-        }, (err) => { if (err) throw err });
 
-        travel.save();
+        const decoded = jwt.verify(args.token, "mysecret");
+        const user = await User.findOne({_id: decoded.id})
+        if(user){
+            const travel = new Travel({
+                users: user.id,
+                location,
+                time,
+                date,
+            }, (err) => { if (err) throw err });
 
-        return { ...travel._doc }
+            travel.save();
+
+            user.travelDetails.push(travel);
+            await user.save();
+
+            return { ...travel._doc }
+        }
     }
     catch (err) {
         throw err;
@@ -122,7 +131,7 @@ export async function Travels(){
                 _id: travel._id.toString(),
                 location: travel.location,
                 time: travel.time,
-                date: travel.date,
+                date: travel.date
               }));
     }
     catch (err) {

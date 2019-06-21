@@ -22,7 +22,14 @@ const userSchema = new Schema({
         required: true,
         min: 8,
         max: 32
-    }
-})
+    },
+    travelDetails:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Travel'
+        }
+    ]
+    },{ timestamps: true }
+)
 
 export default mongoose.model('User', userSchema);
