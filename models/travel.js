@@ -1,7 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
 
 const travelSchema = new Schema({
-    location: {
+    start_location: {
+        type: String,
+        required: true
+    },
+    end_location: {
         type: String,
         required: true
     },

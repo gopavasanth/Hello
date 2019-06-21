@@ -11,7 +11,8 @@ type User {
 }
 type Travel{
     _id: ID!
-    location: String!
+    start_location: String!
+    end_location: String!
     time: String!
     date: String!
 }
@@ -23,7 +24,7 @@ type RootQuery {
 type RootMutation {
     tokenAuth(email: String!, password: String!): User
     createUser(email: String!, password: String!, confirm: String!,username: String!,firstname: String!,lastname: String!): User
-    createTravel(token: String!, location: String!, time: String!, date: String!): Travel
+    createTravel(token: String!, start_location: String!, end_location: String!, time: String!, date: String!): Travel
 }
 schema {
     query: RootQuery
