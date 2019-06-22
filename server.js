@@ -13,7 +13,7 @@ app.use(
     bodyParser.json()
 )
 app.get('/', function (req, res) {
-    res.send('Go to localhost:4000/graphql to see graphql :)')
+    res.redirect('/graphql');
   })
 app.use(
     "/graphql",
