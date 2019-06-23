@@ -12,11 +12,8 @@ app.use(
     cors(),
     bodyParser.json()
 )
-app.get('/', function (req, res) {
-    res.redirect('/graphql');
-  })
 app.use(
-    "/graphql",
+    "/",
     expressGraphQL({
         schema: graphQLSchema,
         rootValue: graphQLResolvers,

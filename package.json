@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js",
+    "start-server": "babel-node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
