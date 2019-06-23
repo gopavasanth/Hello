@@ -4,7 +4,7 @@
   "description": "This is a Service-oriented product which integrates the surrounding unknown-people to meet and decide their journey safe, cheaper and happy. The basic idea goes like this - We normally go out individually, it may be for a purpose. But most of the times when we are alone our journey becomes boring. Now the world is going to become interesting and curious about this upcoming product.",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server.js",
+    "start": "nodemon --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
