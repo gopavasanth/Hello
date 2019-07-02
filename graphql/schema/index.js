@@ -8,6 +8,7 @@ type User {
     firstname: String!
     lastname: String!
     token: String!
+    imageUrl: String!
 }
 type Travel{
     _id: ID!
@@ -23,8 +24,9 @@ type RootQuery {
 }
 type RootMutation {
     tokenAuth(email: String!, password: String!): User
-    createUser(email: String!, password: String!, confirm: String!,username: String!,firstname: String!,lastname: String!): User
+    createUser(email: String!, password: String!, confirm: String!,username: String!,firstname: String!,lastname: String!,imageUrl: String!): User
     createTravel(token: String!, start_location: String!, end_location: String!, time: String!, date: String!): Travel
+    updateProfile(token: String!, username: String!, firstname: String!, lastname: String!): User
 }
 schema {
     query: RootQuery

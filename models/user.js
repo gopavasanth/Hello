@@ -23,6 +23,10 @@ const userSchema = new Schema({
         min: 8,
         max: 32
     },
+    imageUrl: {
+        type: String,
+        required: true
+    },
     travelDetails:[
         {
             type: Schema.Types.ObjectId,

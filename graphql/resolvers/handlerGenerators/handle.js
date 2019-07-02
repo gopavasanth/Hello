@@ -11,7 +11,8 @@ export async function createUser(args) {
             firstname,
             lastname,
             password,
-            confirm
+            confirm,
+            imageUrl
         } = args; //retrieve values from arguments
 
         const existingUser = await User.findOne({ email });
@@ -30,7 +31,8 @@ export async function createUser(args) {
             username,
             firstname,
             lastname,
-            password: hashedPassword
+            password: hashedPassword,
+            imageUrl
         }, (err) => { if (err) throw err });
 
         user.save();
@@ -59,6 +61,21 @@ export async function tokenAuth(args) {
         return { token, password: null, ...user._doc }
     }
     catch (err) {
+        throw err;
+    }
+}
+
+export async function updateProfile(args){
+    try{
+        const decoded = jwt.verify(args.token, "mysecret");
+        User.findByIdAndUpdate(
+            decoded.id,
+            { username: args.username, firstname: args.firstname, lastname: args.lastname },
+            { new: true }
+        )
+        return {token, password: null, ...user.doc }
+    }
+    catch(err){
         throw err;
     }
 }
