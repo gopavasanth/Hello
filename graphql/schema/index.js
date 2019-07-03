@@ -23,6 +23,7 @@ type RootQuery {
     getProfile(token: String!): User
 }
 type RootMutation {
+    createChat(token: String!, message: String!): User
     tokenAuth(email: String!, password: String!): User
     createUser(email: String!, password: String!, confirm: String!,username: String!,firstname: String!,lastname: String!,imageUrl: String!): User
     createTravel(token: String!, start_location: String!, end_location: String!, time: String!, date: String!): Travel

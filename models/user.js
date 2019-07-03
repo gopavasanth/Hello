@@ -27,6 +27,12 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    message:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Chat'
+        }
+    ],
     travelDetails:[
         {
             type: Schema.Types.ObjectId,

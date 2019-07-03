@@ -2,6 +2,7 @@ import User from '../../../models/user';
 import Travel from '../../../models/travel';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import Chat from '../../../models/message';
 
 export async function createUser(args) {
     try {
@@ -116,7 +117,7 @@ export async function createTravel(args) {
             end_location,
             time,
             date,
-        } = args; 
+        } = args;
 
         const decoded = jwt.verify(args.token, "mysecret");
         const user = await User.findOne({_id: decoded.id})
@@ -158,3 +159,36 @@ export async function Travels(){
         throw err;
     }
 };
+
+export async function createChat(args) {
+    try {
+        const {
+            token,
+            message,
+        } = args;
+
+        const decoded = jwt.verify(args.token, "mysecret");
+        const user = await User.findOne({_id: decoded.id});
+
+        if (user) {
+            const chatMessage = new Chat({
+                users: user.id,
+                message,
+            }, (err) => {
+                if (err) throw err
+            });
+
+            chatMessage.save();
+
+            user.message.push(chatMessage);
+            await user.save();
+
+            return { ...chatMessage._doc , ...user._doc}
+
+        }
+
+    }
+    catch (err) {
+        throw err;
+    }
+}
