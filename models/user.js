@@ -24,8 +24,7 @@ const userSchema = new Schema({
         max: 32
     },
     imageUrl: {
-        type: String,
-        required: true
+        type: String
     },
     message:[
         {
