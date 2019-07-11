@@ -113,8 +113,8 @@ export async function createTravel(args) {
     try {
         const {
             token,
-            start_location,
-            end_location,
+            from,
+            to,
             time,
             date,
         } = args;
@@ -124,8 +124,8 @@ export async function createTravel(args) {
         if(user){
             const travel = new Travel({
                 users: user.id,
-                start_location,
-                end_location,
+                from,
+                to,
                 time,
                 date,
             }, (err) => { if (err) throw err });
@@ -149,8 +149,8 @@ export async function Travels(){
             .exec();
             return travels.map(travel => ({
                 _id: travel._id.toString(),
-                start_location: travel.start_location,
-                end_location: travel.end_location,
+                from: travel.from,
+                to: travel.to,
                 time: travel.time,
                 date: travel.date
               }));
