@@ -115,8 +115,8 @@ export async function createTravel(args) {
             token,
             from,
             to,
-            time,
-            date,
+            // time,
+            // date,
         } = args;
 
         const decoded = jwt.verify(args.token, "mysecret");
@@ -126,8 +126,8 @@ export async function createTravel(args) {
                 users: user.id,
                 from,
                 to,
-                time,
-                date,
+                // time,
+                // date,
             }, (err) => { if (err) throw err });
 
             travel.save();
@@ -151,8 +151,8 @@ export async function Travels(){
                 _id: travel._id.toString(),
                 from: travel.from,
                 to: travel.to,
-                time: travel.time,
-                date: travel.date
+                // time: travel.time,
+                // date: travel.date
               }));
     }
     catch (err) {
