@@ -9,13 +9,12 @@ type User {
     lastname: String!
     token: String!
     imageUrl: String
+    travelDetails: String
 }
 type Travel{
     _id: ID!
     from: String!
     to: String!
-    time: String!
-    date: String!
 }
 type RootQuery {
     Users: [User!]!
@@ -28,6 +27,7 @@ type RootMutation {
     createUser(email: String!, password: String!, confirm: String!,username: String!,firstname: String!,lastname: String!,imageUrl: String): User
     createTravel(token: String!, from: String!, to: String!): Travel
     updateProfile(token: String!, username: String!, firstname: String!, lastname: String!): User
+    getTravels(token:String!): [Travel]
 }
 schema {
     query: RootQuery

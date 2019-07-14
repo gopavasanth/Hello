@@ -192,3 +192,18 @@ export async function createChat(args) {
         throw err;
     }
 }
+
+export async function getTravels(args) {
+    try {
+        const decoded = jwt.verify(args.token, "mysecret");
+        const traveldetails = await Travel.find({ users:decoded.id })
+        return traveldetails.map(travel =>({
+            _id: travel.id.toString(),
+            from: travel.from,
+            to: travel.to,
+        }));
+    }
+    catch (err) {
+        throw err;
+    }
+}
