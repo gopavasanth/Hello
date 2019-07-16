@@ -43,26 +43,26 @@ export async function createUser(args) {
         // create a token
         const token = jwt.sign({ id: user._id }, "mysecret", {expiresIn: '24h'});
 
-        let transporter = nodemailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 465,
-            secure: true,
-            auth: {
-                user: '@gmail.com',
-                pass: 'password'
-            }
-        });
-        let mailOptions = {
-            to: args.email,
-            subject: 'Welcome to Hello :)',
-            text: 'Hello, Login with Hello Password:' + hashedPassword + 'Reset password'
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                return console.log(error);
-            }
-            console.log('Message %s sent: %s', info.messageId, info.response);
-        });
+        // let transporter = nodemailer.createTransport({
+        //     host: 'smtp.gmail.com',
+        //     port: 465,
+        //     secure: true,
+        //     auth: {
+        //         user: '@gmail.com',
+        //         pass: 'password'
+        //     }
+        // });
+        // let mailOptions = {
+        //     to: args.email,
+        //     subject: 'Welcome to Hello :)',
+        //     text: 'Hello, Login with Hello Password:' + hashedPassword + 'Reset password'
+        // };
+        // transporter.sendMail(mailOptions, (error, info) => {
+        //     if (error) {
+        //         return console.log(error);
+        //     }
+        //     console.log('Message %s sent: %s', info.messageId, info.response);
+        // });
 
         return { token, password: null, ...user._doc }
     }
@@ -76,12 +76,12 @@ export async function tokenAuth(args) {
         const user = await User.findOne({ email: args.email });
         if (!user) throw new Error('Email does not exist');
 
-        if(args.password == user.password){
-            const token = jwt.sign({ id: user._id }, "mysecret", {expiresIn: '24h'});
-            return { token, password: null, ...user._doc }
-
-        }
+        const passwordIsValid = await bcrypt.compareSync(args.password, user.password);	
         if (!passwordIsValid) throw new Error('Email or Password is invalid');
+        
+        const token = jwt.sign({ id: user._id }, "mysecret", {expiresIn: '24h'});
+        
+        return { token, password: null, ...user._doc }
     }
     catch (err) {
         throw err;
