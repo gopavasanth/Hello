@@ -164,9 +164,17 @@ export async function createTravel(args) {
         throw err;
     }
 };
-export async function Travels(){
+export async function Travels(args){
     try{
-        const travels = await Travel.find({})
+        const {
+            token
+        } = args;
+
+        const decoded = jwt.verify(args.token, "mysecret");
+        const user = await User.findOne({_id: decoded.id})
+
+        if(user){
+            const travels = await Travel.find({})
             .populate()
             .exec();
             return travels.map(travel => ({
@@ -176,6 +184,7 @@ export async function Travels(){
                 // time: travel.time,
                 // date: travel.date
               }));
+        }
     }
     catch (err) {
         throw err;
@@ -215,7 +224,7 @@ export async function createChat(args) {
     }
 }
 
-export async function getTravels(args) {
+export async function getMyTravels(args) {
     try {
         const decoded = jwt.verify(args.token, "mysecret");
         const traveldetails = await Travel.find({ users:decoded.id })

@@ -18,16 +18,16 @@ type Travel{
 }
 type RootQuery {
     Users: [User!]!
-    Travels: [Travel!]!
     getProfile(token: String!): User
 }
 type RootMutation {
+    Travels(token: String!): [Travel!]!
     createChat(token: String!, message: String!): User
     tokenAuth(email: String!, password: String!): User
     createUser(email: String!, password: String!, confirm: String!,username: String!,firstname: String!,lastname: String!,imageUrl: String): User
     createTravel(token: String!, from: String!, to: String!): Travel
     updateProfile(token: String!, username: String!, firstname: String!, lastname: String!): User
-    getTravels(token:String!): [Travel]
+    getMyTravels(token:String!): [Travel]
 }
 schema {
     query: RootQuery
