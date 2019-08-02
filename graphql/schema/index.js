@@ -15,6 +15,7 @@ type Travel{
     _id: ID!
     from: String!
     to: String!
+    users: String!
 }
 type RootQuery {
     Users: [User!]!

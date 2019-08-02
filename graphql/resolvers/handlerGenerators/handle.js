@@ -181,8 +181,7 @@ export async function Travels(args){
                 _id: travel._id.toString(),
                 from: travel.from,
                 to: travel.to,
-                // time: travel.time,
-                // date: travel.date
+                users: travel.users.toString()
               }));
         }
     }
