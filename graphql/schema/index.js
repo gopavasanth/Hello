@@ -14,6 +14,8 @@ type User {
 type Travel{
     _id: ID!
     from: String!
+    fromlatitude: String!
+    fromlongitude: String!
     to: String!
     users: String!
 }
@@ -26,7 +28,7 @@ type RootMutation {
     createChat(token: String!, message: String!): User
     tokenAuth(email: String!, password: String!): User
     createUser(email: String!, password: String!, confirm: String!,username: String!,firstname: String!,lastname: String!,imageUrl: String): User
-    createTravel(token: String!, from: String!, to: String!): Travel
+    createTravel(token: String!, from: String!, to: String!, fromlatitude: String! , fromlongitude: String!): Travel
     updateProfile(token: String!, username: String!, firstname: String!, lastname: String!): User
     getMyTravels(token:String!): [Travel]
 }

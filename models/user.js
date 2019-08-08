@@ -23,6 +23,9 @@ const userSchema = new Schema({
         min: 8,
         max: 32
     },
+    verified: {
+        type: Boolean
+    },
     imageUrl: {
         type: String
     },

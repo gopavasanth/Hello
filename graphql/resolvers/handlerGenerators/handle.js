@@ -34,7 +34,8 @@ export async function createUser(args) {
             firstname,
             lastname,
             password: hashedPassword,
-            imageUrl
+            imageUrl,
+            verified: false,
         }, (err) => { if (err) throw err });
 
         user.save();
@@ -137,6 +138,8 @@ export async function createTravel(args) {
             token,
             from,
             to,
+            fromlatitude,
+            fromlongitude,
             // time,
             // date,
         } = args;
@@ -148,6 +151,8 @@ export async function createTravel(args) {
                 users: user.id,
                 from,
                 to,
+                fromlatitude,
+                fromlongitude,
                 // time,
                 // date,
             }, (err) => { if (err) throw err });
@@ -181,7 +186,9 @@ export async function Travels(args){
                 _id: travel._id.toString(),
                 from: travel.from,
                 to: travel.to,
-                users: travel.users.toString()
+                users: travel.users.toString(),
+                fromlatitude: travel.fromlatitude,
+                fromlongitude: travel.fromlongitude,
               }));
         }
     }

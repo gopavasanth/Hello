@@ -9,8 +9,16 @@ const travelSchema = new Schema({
         type: String,
         required: true
     },
+    fromlatitude: {
+        type: String,
+        required: true
+    },
+    fromlongitude: {
+        type: String,
+        required: true
+    },
     // date: {
-    //     type: String,
+    //     type: Date,
     //     required: true
     // },
     // time: {
