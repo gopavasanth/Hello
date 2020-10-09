@@ -23,8 +23,8 @@ app.use(
 
 function main() {
     const port = process.env.PORT || 4000;
-    const URI = `mongodb+srv://harshith:harsha2001@hello-zz2zx.mongodb.net/test?retryWrites=true&w=majority`;
-    mongoose.connect(URI, { useNewUrlParser: true })
+    const URI = `mongodb+srv://hello:hello@hello-jnl1o.mongodb.net/test?retryWrites=true&w=majority`;
+    mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => {
             app.listen(port, () => console.log(`Server is listening on port: ${port}`));
         })
