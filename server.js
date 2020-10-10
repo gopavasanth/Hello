@@ -6,6 +6,8 @@ import mongoose from 'mongoose';
 import graphQLSchema from './graphql/schema';
 import graphQLResolvers from './graphql/resolvers';
 
+const config = require('./config');
+
 const app = express();
 
 app.use(
@@ -23,7 +25,7 @@ app.use(
 
 function main() {
     const port = process.env.PORT || 4000;
-    const URI = `mongodb+srv://hello:hello@hello-jnl1o.mongodb.net/test?retryWrites=true&w=majority`;
+    const URI = `mongodb+srv://${config.username}:${config.password}@hello.jnl1o.mongodb.net/${config.dbname}?retryWrites=true&w=majority`;
     mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => {
             app.listen(port, () => console.log(`Server is listening on port: ${port}`));
